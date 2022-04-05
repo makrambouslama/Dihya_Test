@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <select id="lang" class="lang">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+    </select>
+    <input type="button" id="btnGenerate" value="Générer la liste des mois" onclick="PopulateDropDownList()" />
+    <hr />
+    <select id="ddlMonths" class="ddlMonths">
+    </select>
+    <hr />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("select.ddlMonths").change(function() {
+                var selectedMonth = $(this).children("option:selected").text();
+                var langValue = $('#lang').find(":selected").val();
+                if(langValue == "fr")
+                {
+                    alert("Vous avez selectionnez le mois : " + selectedMonth);
+                }else if(langValue == "en")
+                {
+                    alert("You have selected the month : " + selectedMonth);
+                }
+            });
+            $("select.lang").change(function() {
+                var selectedLang = $(this).children("option:selected").val();
+                if(selectedLang == "fr")
+                {
+                    $("#btnGenerate").prop("value", "Générer la liste des mois");
+                }else if(selectedLang == "en")
+                {
+                    $("#btnGenerate").prop("value", "Populate months list");
+                }
+            });
+        });
+        function PopulateDropDownList() {
+            $(ddlMonths).empty();
+            var langValue = $('#lang').find(":selected").val();
+            if(langValue == "fr")
+            {
+                this.PopulateFrDropDownList();
+            }else if(langValue == "en")
+            {
+                this.PopulateEnDropDownList();
+            }
+        }
+        function PopulateFrDropDownList() {
+            const months = {1 : "Janvier", 2 : "Fevrier", 3 : "Mars",4 : "Avril",5 : "Mai",6 : "Juin",7 : "Juillet",8 : "Aout",9 : "Septembre",10 : "Octobre",11 : "Novembre",12 : "Decembre"}
+            $.each(months, function(key, value) {   
+            $('#ddlMonths')
+                .append($("<option></option>")
+                    .attr("value", key)
+                    .text(value)); 
+            });
+        }
+        function PopulateEnDropDownList() {
+            const months = {1: "January",2 : "February",3 : "March",4 : "April",5 : "May",6 : "June",7 : "July",8 : "August",9 : "September",10 : "October",11 : "November",12 : "December"}
+            $.each(months, function(key, value) {   
+            $('#ddlMonths')
+                .append($("<option></option>")
+                    .attr("value", key)
+                    .text(value)); 
+            });
+        }
+    </script>
+</body>
+</html>
